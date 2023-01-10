@@ -1,5 +1,13 @@
 class View {
-  constructor(game, el) {}
+  constructor(game, el) {
+  
+    this.game = game;
+    this.el = el;
+    this.handleClick = this.handleClick.bind(this);
+    this.setupBoard();
+    this.bindEvents();
+
+  }
 
   setupBoard() {
     const ul = document.createElement("ul");
@@ -13,7 +21,9 @@ class View {
     this.el.append(ul);
   }
 
-  bindEvents() {}
+  bindEvents() {
+    this.el.addEventListener("click", this.handleClick)
+  }
 
   handleClick(e) {
     const el = e.target

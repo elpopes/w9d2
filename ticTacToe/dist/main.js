@@ -15,7 +15,7 @@
   \**********************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("const View = __webpack_require__(/*! ./ttt-view.js */ \"./src/ttt-view.js\");\nconst Game = __webpack_require__(/*! ../ttt_node/game.js */ \"./ttt_node/game.js\");\n\ndocument.addEventListener(\"DOMContentLoaded\", () => {\n  const game = new Game();\n  const containerElement = document.querySelector('.ttt')\n  new View(game, containerElement);\n});\n\n\n//# sourceURL=webpack://tictactoe/./src/index.js?");
+eval("console.log(\"this is index\")\nconst View = __webpack_require__(/*! ./ttt-view.js */ \"./src/ttt-view.js\");\nconst Game = __webpack_require__(/*! ../ttt_node/game.js */ \"./ttt_node/game.js\");\n\ndocument.addEventListener(\"DOMContentLoaded\", () => {\n  \n  const game = new Game();\n  const containerElement = document.querySelector('.ttt')\n  new View(game, containerElement);\n});\n\n\n//# sourceURL=webpack://tictactoe/./src/index.js?");
 
 /***/ }),
 
@@ -25,7 +25,7 @@ eval("const View = __webpack_require__(/*! ./ttt-view.js */ \"./src/ttt-view.js\
   \*************************/
 /***/ ((module) => {
 
-eval("class View {\n  constructor(game, el) {}\n\n  setupBoard() {\n    const ul = document.createElement(\"ul\");\n    for (let rowIdx = 0; rowIdx < 3; rowIdx++) {\n      for (let colIdx = 0; colIdx < 3; colIdx++) {\n        const li = document.createElement(\"li\");\n        li.dataset.pos = JSON.stringify([rowIdx, colIdx]);\n        ul.append(li);\n      }\n    }\n    this.el.append(ul);\n  }\n\n  bindEvents() {}\n\n  handleClick(e) {\n    const el = e.target\n    if (el.nodeName === \"LI\") {\n      this.makeMove(el)\n    }\n  }\n\n  makeMove(square) {\n    const pos = JSON.parse(square.dataset.pos);\n    const currentPlayer = this.game.currentPlayer;\n\n    try {\n      this.game.playMove(pos);\n    } catch (e){\n      alert(`This ${e.msg.toLowerCase()}`)\n    }\n    square.classList.add(currentPlayer);\n\n    if (this.game.isOver()) this.handleGameOver()\n  }\n}\n\nmodule.exports = View;\n\n\n//# sourceURL=webpack://tictactoe/./src/ttt-view.js?");
+eval("class View {\n  constructor(game, el) {\n  \n    this.game = game;\n    this.el = el;\n    this.handleClick = this.handleClick.bind(this);\n    this.setupBoard();\n    this.bindEvents();\n\n  }\n\n  setupBoard() {\n    const ul = document.createElement(\"ul\");\n    for (let rowIdx = 0; rowIdx < 3; rowIdx++) {\n      for (let colIdx = 0; colIdx < 3; colIdx++) {\n        const li = document.createElement(\"li\");\n        li.dataset.pos = JSON.stringify([rowIdx, colIdx]);\n        ul.append(li);\n      }\n    }\n    this.el.append(ul);\n  }\n\n  bindEvents() {\n    this.el.addEventListener(\"click\", this.handleClick)\n  }\n\n  handleClick(e) {\n    const el = e.target\n    if (el.nodeName === \"LI\") {\n      this.makeMove(el)\n    }\n  }\n\n  makeMove(square) {\n    const pos = JSON.parse(square.dataset.pos);\n    const currentPlayer = this.game.currentPlayer;\n\n    try {\n      this.game.playMove(pos);\n    } catch (e){\n      alert(`This ${e.msg.toLowerCase()}`)\n    }\n    square.classList.add(currentPlayer);\n\n    if (this.game.isOver()) this.handleGameOver()\n  }\n}\n\nmodule.exports = View;\n\n\n//# sourceURL=webpack://tictactoe/./src/ttt-view.js?");
 
 /***/ }),
 

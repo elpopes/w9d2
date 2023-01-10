@@ -15,9 +15,26 @@ class View {
 
   bindEvents() {}
 
-  handleClick(e) {}
+  handleClick(e) {
+    const el = e.target
+    if (el.nodeName === "LI") {
+      this.makeMove(el)
+    }
+  }
 
-  makeMove(square) {}
+  makeMove(square) {
+    const pos = JSON.parse(square.dataset.pos);
+    const currentPlayer = this.game.currentPlayer;
+
+    try {
+      this.game.playMove(pos);
+    } catch (e){
+      alert(`This ${e.msg.toLowerCase()}`)
+    }
+    square.classList.add(currentPlayer);
+
+    if (this.game.isOver()) this.handleGameOver()
+  }
 }
 
 module.exports = View;

@@ -15,7 +15,7 @@
   \**********************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("const View = __webpack_require__(/*! ./ttt-view.js */ \"./src/ttt-view.js\");\nconst Game = __webpack_require__(/*! ../ttt_node/game.js */ \"./ttt_node/game.js\");\n\ndocument.addEventListener(\"DOMContentLoaded\", () => {\n  // Your code here\n});\n\n\n//# sourceURL=webpack://tictactoe/./src/index.js?");
+eval("const View = __webpack_require__(/*! ./ttt-view.js */ \"./src/ttt-view.js\");\nconst Game = __webpack_require__(/*! ../ttt_node/game.js */ \"./ttt_node/game.js\");\n\ndocument.addEventListener(\"DOMContentLoaded\", () => {\n  const game = new Game();\n  const containerElement = document.querySelector('.ttt')\n  new View(game, containerElement);\n});\n\n\n//# sourceURL=webpack://tictactoe/./src/index.js?");
 
 /***/ }),
 
